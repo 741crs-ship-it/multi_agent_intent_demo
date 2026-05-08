@@ -1,0 +1,15 @@
+# 内网环境变量示例（请复制到你的终端后替换真实值）
+# 注意：不要把真实 token 提交到代码仓库。
+
+LLM_API_URL=http://your-internal-gateway/v1/chat/completions
+LLM_API_TOKEN=your_token_here
+LLM_MODEL=your-internal-model-name
+LLM_TIMEOUT_SECONDS=12
+LLM_MAX_RETRIES=2
+
+# PowerShell 临时设置示例：
+# $env:LLM_API_URL="http://your-internal-gateway/v1/chat/completions"
+# $env:LLM_API_TOKEN="your_token_here"
+# $env:LLM_MODEL="your-internal-model-name"
+# $env:LLM_TIMEOUT_SECONDS="12"
+# $env:LLM_MAX_RETRIES="2"

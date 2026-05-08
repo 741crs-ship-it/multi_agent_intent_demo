@@ -1,0 +1,90 @@
+{
+  "combo_rules": [
+    {
+      "name": "balance_then_transfer",
+      "all_keywords": ["余额", "转账"],
+      "tasks": [
+        {
+          "id": "t1",
+          "agent": "balance",
+          "action": "query_balance",
+          "params": {},
+          "depends_on": []
+        },
+        {
+          "id": "t2",
+          "agent": "transfer",
+          "action": "transfer",
+          "params": {
+            "amount": 100.0,
+            "to_account": "ACC-20002"
+          },
+          "depends_on": ["t1"]
+        }
+      ]
+    }
+  ],
+  "intents": [
+    {
+      "name": "transfer",
+      "priority": 100,
+      "keywords": ["转账", "付款", "汇款"],
+      "tasks": [
+        {
+          "id": "t1",
+          "agent": "risk",
+          "action": "risk_check",
+          "params": {
+            "amount": 100.0
+          },
+          "depends_on": []
+        },
+        {
+          "id": "t2",
+          "agent": "transfer",
+          "action": "transfer",
+          "params": {
+            "amount": 100.0,
+            "to_account": "ACC-20002"
+          },
+          "depends_on": ["t1"]
+        }
+      ]
+    },
+    {
+      "name": "balance",
+      "priority": 80,
+      "keywords": ["余额", "可用金额", "账户余额"],
+      "task": {
+        "id": "t1",
+        "agent": "balance",
+        "action": "query_balance",
+        "params": {},
+        "depends_on": []
+      }
+    },
+    {
+      "name": "product",
+      "priority": 60,
+      "keywords": ["产品", "理财", "功能推荐"],
+      "task": {
+        "id": "t1",
+        "agent": "product",
+        "action": "product_qa",
+        "params": {
+          "question_from_input": true
+        },
+        "depends_on": []
+      }
+    }
+  ],
+  "fallback_task": {
+    "id": "t1",
+    "agent": "chat",
+    "action": "chitchat",
+    "params": {
+      "message_from_input": true
+    },
+    "depends_on": []
+  }
+}
